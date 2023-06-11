@@ -1,20 +1,38 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-export default function App() {
+import { Ionicons } from '@expo/vector-icons';
+
+import HomeScreen from './components/Home';
+import RecordScreen from './components/Record';
+import RaveScreen from './components/Rave';
+
+const Tab = createBottomTabNavigator();
+
+
+const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="Home" component={HomeScreen} options={{
+              tabBarIcon: ({ color, size }) => (
+                <Ionicons name="home-outline" size={size} color={color} />),}}
+        />
+        <Tab.Screen name="Record" component={RecordScreen} options={{
+              tabBarIcon: ({ color, size }) => (
+                <Ionicons name="recording-outline" size={size} color={color} />
+              ),}}
+        />
+        <Tab.Screen name="Rave" component={RaveScreen} options={{
+              tabBarIcon: ({ color, size }) => (
+                <Ionicons name="musical-notes-outline" size={size} color={color} />
+              ),}}
+        />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
